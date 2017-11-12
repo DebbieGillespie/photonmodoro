@@ -2,7 +2,7 @@ int led = D7;
 int button = D0;
 int pullup = D2;
 int ledOn = LOW;
-int toggle = LOW;
+int stateChangable = HIGH;
 
 void setup() {
   pinMode(led, OUTPUT);
@@ -14,19 +14,15 @@ void setup() {
 void loop() {
 
     if(digitalRead(button)) {
-        toggle = HIGH;
+        if(stateChangable) {
+            ledOn = toggleState(ledOn);
+            stateChangable = LOW;
+        }
     } else {
-        toggle = LOW;
+        stateChangable = HIGH;
     }
 
     digitalWrite(led, ledOn);
-
-    if(toggle) {
-        ledOn = toggleState(ledOn);
-        toggle = LOW;
-    }
-
-    delay(1);
 }
 
 int toggleState(int currentState) {
