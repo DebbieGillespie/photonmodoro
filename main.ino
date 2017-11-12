@@ -12,24 +12,22 @@ void setup() {
 }
 
 void loop() {
-
-    if(digitalRead(button)) {
-        if(stateChangable) {
-            ledOn = toggleState(ledOn);
-            stateChangable = LOW;
-        }
-    } else {
-        stateChangable = HIGH;
+  if(digitalRead(button)) {
+    if(stateChangable) {
+      ledOn = toggleState(ledOn);
+      stateChangable = LOW;
     }
+  } else {
+    stateChangable = HIGH;
+  }
 
-    digitalWrite(led, ledOn);
+  digitalWrite(led, ledOn);
 }
 
 int toggleState(int currentState) {
   if (currentState) {
     return LOW;
-  }
-  else {
+  } else {
     return HIGH;
   }
 }
